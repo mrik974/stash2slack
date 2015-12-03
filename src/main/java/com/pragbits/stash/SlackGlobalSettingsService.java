@@ -2,6 +2,15 @@ package com.pragbits.stash;
 
 public interface SlackGlobalSettingsService {
 
+	String getUsername(String key);
+	void setUsername(String key, String value);
+	
+	String getIconUrl(String key);
+	void setIconUrl(String key, String value);
+	
+	String getIconEmoji(String key);
+	void setIconEmoji(String key, String value);
+	
     // hook and channel name
     String getWebHookUrl(String key);
     void setWebHookUrl(String key, String value);

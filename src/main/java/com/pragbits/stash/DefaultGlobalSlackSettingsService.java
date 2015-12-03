@@ -3,6 +3,7 @@ package com.pragbits.stash;
 
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
+
 import org.apache.xpath.operations.Bool;
 
 public class DefaultGlobalSlackSettingsService implements SlackGlobalSettingsService {
@@ -182,5 +183,50 @@ public class DefaultGlobalSlackSettingsService implements SlackGlobalSettingsSer
     public void setNotificationPrLevel(String key, String value) {
         pluginSettings.put(key, value);
     }
+
+	@Override
+	public String getUsername(String key) {
+		Object retval = pluginSettings.get(key);
+        if (null == retval) {
+            return "Stash";
+        }
+        return retval.toString();
+	}
+
+	@Override
+	public void setUsername(String key, String value) {
+		pluginSettings.put(key, value);
+		
+	}
+
+	@Override
+	public String getIconUrl(String key) {
+		Object retval = pluginSettings.get(key);
+        if (null == retval) {
+            return "";
+        }
+        return retval.toString();
+	}
+
+	@Override
+	public void setIconUrl(String key, String value) {
+		pluginSettings.put(key, value);
+		
+	}
+
+	@Override
+	public String getIconEmoji(String key) {
+		Object retval = pluginSettings.get(key);
+        if (null == retval) {
+            return "";
+        }
+        return retval.toString();
+	}
+
+	@Override
+	public void setIconEmoji(String key, String value) {
+		pluginSettings.put(key, value);
+		
+	}
 
 }

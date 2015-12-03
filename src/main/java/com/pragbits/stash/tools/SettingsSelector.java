@@ -15,6 +15,9 @@ public class SettingsSelector {
     private SlackSettings resolvedSlackSettings;
 
 
+    private static final String KEY_GLOBAL_SETTING_USERNAME = "stash2slack.globalsettings.username";
+    private static final String KEY_GLOBAL_SETTING_ICON_URL = "stash2slack.globalsettings.iconurl";
+    private static final String KEY_GLOBAL_SETTING_ICON_EMOJI = "stash2slack.globalsettings.iconemoji";
     private static final String KEY_GLOBAL_SETTING_HOOK_URL = "stash2slack.globalsettings.hookurl";
     private static final String KEY_GLOBAL_SETTING_CHANNEL_NAME = "stash2slack.globalsettings.channelname";
     private static final String KEY_GLOBAL_SETTING_NOTIFICATIONS_ENABLED = "stash2slack.globalsettings.slacknotificationsenabled";
@@ -61,7 +64,10 @@ public class SettingsSelector {
                 slackSettings.isSlackNotificationsOverrideEnabled() ? slackSettings.getNotificationLevel() : slackGlobalSettingsService.getNotificationLevel(KEY_GLOBAL_SETTING_NOTIFICATIONS_LEVEL),
                 slackSettings.isSlackNotificationsOverrideEnabled() ? slackSettings.getNotificationPrLevel() : slackGlobalSettingsService.getNotificationPrLevel(KEY_GLOBAL_SETTING_NOTIFICATIONS_PR_LEVEL),
                 slackSettings.isSlackNotificationsOverrideEnabled() ? slackSettings.getSlackChannelName() : slackGlobalSettingsService.getChannelName(KEY_GLOBAL_SETTING_CHANNEL_NAME),
-                slackSettings.isSlackNotificationsOverrideEnabled() ? slackSettings.getSlackWebHookUrl() : slackGlobalSettingsService.getWebHookUrl(KEY_GLOBAL_SETTING_HOOK_URL)
+                slackSettings.isSlackNotificationsOverrideEnabled() ? slackSettings.getSlackWebHookUrl() : slackGlobalSettingsService.getWebHookUrl(KEY_GLOBAL_SETTING_HOOK_URL),
+                slackGlobalSettingsService.getUsername(KEY_GLOBAL_SETTING_USERNAME),
+                slackGlobalSettingsService.getIconUrl(KEY_GLOBAL_SETTING_ICON_URL),
+                slackGlobalSettingsService.getIconEmoji(KEY_GLOBAL_SETTING_ICON_EMOJI)
         );
     }
 

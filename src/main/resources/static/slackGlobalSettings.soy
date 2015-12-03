@@ -1,6 +1,9 @@
 {namespace stash.page.slack.global.settings}
 
 /**
+ * @param slackGlobalUsername
+ * @param slackGlobalIconUrl
+ * @param slackGlobalIconEmoji
  * @param slackGlobalWebHookUrl
  * @param slackChannelName
  * @param slackNotificationsEnabled
@@ -142,6 +145,30 @@
                     {param initialValue: $slackGlobalWebHookUrl /}
                     {param description: stash_i18n('stash.web.slack.global.settings.slack.channel.description', 'Slack webhook url to use. This can be overriden for each repository at the repo slack settings page, if desired') /}
                 {/call}
+                
+                <h4>Additional configuration</h4>
+                
+                
+                {call widget.aui.form.text}
+                    {param id: 'slackGlobalUsername' /}
+                    {param labelContent: stash_i18n('stash.web.slack.global.settings.slack.username', 'Username') /}
+                    {param initialValue: $slackGlobalUsername /}
+                    {param description: stash_i18n('stash.web.slack.global.settings.slack.username.description', 'Slack bot username to use') /}
+                {/call}
+                {call widget.aui.form.text}
+                    {param id: 'slackGlobalIconUrl' /}
+                    {param labelContent: stash_i18n('stash.web.slack.global.settings.slack.iconurl', 'Icon URL') /}
+                    {param initialValue: $slackGlobalIconUrl /}
+                    {param description: stash_i18n('stash.web.slack.global.settings.slack.iconurl.description', 'The icon URL to use') /}
+                {/call}
+                {call widget.aui.form.text}
+                    {param id: 'slackGlobalIconEmoji' /}
+                    {param labelContent: stash_i18n('stash.web.slack.global.settings.slack.iconemoji', 'Icon Emoji') /}
+                    {param initialValue: $slackGlobalIconEmoji /}
+                    {param description: stash_i18n('stash.web.slack.global.settings.slack.iconemoji.description', 'The icon emoji to use') /}
+                {/call}
+                
+                
                 {call aui.form.buttons}
                     {param content}
                         {call aui.form.submit}

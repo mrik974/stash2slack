@@ -162,6 +162,9 @@ public class RepositoryPushActivityListener {
 
                 payload.setText(text);
                 payload.setMrkdwn(true);
+                payload.setUsername(resolvedSlackSettings.getSlackUsername());
+                payload.setIconUrl(resolvedSlackSettings.getSlackIconUrl());
+                payload.setIconEmoji(resolvedSlackSettings.getSlackIconEmoji());
 
                 switch (resolvedSlackSettings.getNotificationLevel()) {
                     case COMPACT:

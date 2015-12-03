@@ -26,6 +26,9 @@ import java.io.IOException;
 import java.util.Map;
 
 public class SlackGlobalSettingsServlet extends HttpServlet {
+	static final String KEY_GLOBAL_SETTING_USERNAME = "stash2slack.globalsettings.username";
+	static final String KEY_GLOBAL_SETTING_ICON_URL = "stash2slack.globalsettings.iconurl";
+	static final String KEY_GLOBAL_SETTING_ICON_EMOJI = "stash2slack.globalsettings.iconemoji";
     static final String KEY_GLOBAL_SETTING_HOOK_URL = "stash2slack.globalsettings.hookurl";
     static final String KEY_GLOBAL_SETTING_CHANNEL_NAME = "stash2slack.globalsettings.channelname";
     static final String KEY_GLOBAL_SETTING_NOTIFICATIONS_ENABLED = "stash2slack.globalsettings.slacknotificationsenabled";
@@ -71,6 +74,21 @@ public class SlackGlobalSettingsServlet extends HttpServlet {
             // Skip form processing
             doGet(req, res);
             return;
+        }
+        
+        String globalUsername = req.getParameter("slackGlobalUsername");
+        if (null != globalUsername) {
+            slackGlobalSettingsService.setUsername(KEY_GLOBAL_SETTING_USERNAME, globalUsername);
+        }
+        
+        String globalIconUrl = req.getParameter("slackGlobalIconUrl");
+        if (null != globalIconUrl) {
+            slackGlobalSettingsService.setIconUrl(KEY_GLOBAL_SETTING_ICON_URL, globalIconUrl);
+        }
+        
+        String globalIconEmoji = req.getParameter("slackGlobalIconEmoji");
+        if (null != globalIconEmoji) {
+            slackGlobalSettingsService.setIconEmoji(KEY_GLOBAL_SETTING_ICON_EMOJI, globalIconEmoji);
         }
 
         String globalWebHookUrl = req.getParameter("slackGlobalWebHookUrl");
@@ -176,7 +194,20 @@ public class SlackGlobalSettingsServlet extends HttpServlet {
             throws ServletException, IOException {
 
         validationService.validateForGlobal(Permission.ADMIN);
-
+       
+        String username = slackGlobalSettingsService.getUsername(KEY_GLOBAL_SETTING_USERNAME);
+        if (null == username || username.equals("")) {
+        	username = "";
+        }
+        String iconUrl = slackGlobalSettingsService.getIconUrl(KEY_GLOBAL_SETTING_ICON_URL);
+        if (null == iconUrl || iconUrl.equals("")) {
+        	iconUrl = "";
+        }
+        String iconEmoji = slackGlobalSettingsService.getIconEmoji(KEY_GLOBAL_SETTING_ICON_EMOJI);
+        if (null == iconEmoji || iconEmoji.equals("")) {
+        	iconEmoji = "";
+        }
+        
         String webHookUrl = slackGlobalSettingsService.getWebHookUrl(KEY_GLOBAL_SETTING_HOOK_URL);
         if (null == webHookUrl || webHookUrl.equals("")) {
             webHookUrl = "";
@@ -204,6 +235,9 @@ public class SlackGlobalSettingsServlet extends HttpServlet {
         render(response,
                 "stash.page.slack.global.settings.viewGlobalSlackSettings",
                 ImmutableMap.<String, Object>builder()
+                        .put("slackGlobalUsername", username)
+                        .put("slackGlobalIconUrl", iconUrl)
+                        .put("slackGlobalIconEmoji", iconEmoji)
                         .put("slackGlobalWebHookUrl", webHookUrl)
                         .put("slackChannelName", channelName)
                         .put("slackNotificationsEnabled", slackNotificationsEnabled)

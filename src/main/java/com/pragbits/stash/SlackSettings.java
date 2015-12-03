@@ -18,5 +18,8 @@ public interface SlackSettings {
     NotificationLevel getNotificationPrLevel();
     String getSlackChannelName();
     String getSlackWebHookUrl();
+    String getSlackUsername();
+    String getSlackIconUrl();
+    String getSlackIconEmoji();
 
 }
